@@ -92,7 +92,7 @@ export default function PlanDisplay({ plan, onRegenerate }: PlanDisplayProps) {
       } else {
         throw new Error(data.error || 'Failed to generate image');
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error generating image:', error);
       
       // Store error message for this card
