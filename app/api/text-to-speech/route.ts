@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
         'Content-Length': audioBuffer.byteLength.toString(),
       },
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Error generating speech:', error);
     return NextResponse.json(
       { 
