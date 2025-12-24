@@ -59,7 +59,6 @@
 // }
 
 
-
 // lib/elevenlabs.ts
 export async function generateSpeech(text: string, apiKey: string): Promise<ArrayBuffer> {
   if (!apiKey || apiKey.trim() === '') {
@@ -108,7 +107,6 @@ export async function generateSpeech(text: string, apiKey: string): Promise<Arra
     return await response.arrayBuffer();
 
   } catch (error: unknown) {
-    // ✅ Proper type check
     if (error instanceof Error) {
       console.error('ElevenLabs error:', error.message);
     } else {
@@ -121,8 +119,13 @@ export async function generateSpeech(text: string, apiKey: string): Promise<Arra
 
 // Helper function to create a silent audio buffer (fallback)
 export function createSilentAudio(): ArrayBuffer {
-  const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+  // We use a custom interface to handle the legacy WebkitAudioContext safely
+  const AudioContextClass = window.AudioContext || 
+    (window as typeof window & { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+  
+  const audioContext = new AudioContextClass();
   const buffer = audioContext.createBuffer(1, audioContext.sampleRate * 0.1, audioContext.sampleRate);
+  
+  // Return the underlying buffer from the channel data
   return buffer.getChannelData(0).buffer;
 }
-
