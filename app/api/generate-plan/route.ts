@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
       success: true, 
       plan 
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Error generating plan:', error);
     
     return NextResponse.json(
