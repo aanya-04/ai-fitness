@@ -79,7 +79,7 @@ export async function generateImageWithOpenRouter(
       model: 'placeholder',
     };
 
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error(`Error generating ${params.type} image:`, error.message);
     
     // Return placeholder on error
