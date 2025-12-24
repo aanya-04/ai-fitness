@@ -140,7 +140,7 @@ export default function VoicePlayer({ plan }: VoicePlayerProps) {
         <DialogHeader>
           <DialogTitle>Listen to Your Plan</DialogTitle>
           <DialogDescription>
-            Select which section you'd like to hear
+            Select which section you&apos;d like to hear
           </DialogDescription>
         </DialogHeader>
         
