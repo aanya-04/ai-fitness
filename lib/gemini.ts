@@ -151,7 +151,7 @@ export async function generateMotivationQuote() {
     
     // Remove quotes if present
     return quote.replace(/^["'`]|["'`]$/g, '');
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Error generating motivation quote:', error.message);
     return 'Push yourself because no one else will!';
   }
