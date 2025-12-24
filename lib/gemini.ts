@@ -132,6 +132,32 @@ Return only the JSON object without any markdown code blocks or additional text.
   }
 }
 
+// export async function generateMotivationQuote() {
+//   // Check API key
+//   if (!API_KEY) {
+//     console.warn('Gemini API key not found, using default quote');
+//     return 'Your only limit is you! Push harder today!';
+//   }
+
+//   try {
+//     const model = genAI.getGenerativeModel({ 
+//       model: 'gemini-1.5-flash'
+//     });
+    
+//     const prompt = 'Generate a short, powerful fitness motivation quote (max 20 words). Return only the quote text without quotes or markdown.';
+    
+//     const result = await model.generateContent(prompt);
+//     const quote = result.response.text().trim();
+    
+//     // Remove quotes if present
+//     return quote.replace(/^["'`]|["'`]$/g, '');
+//   } catch (error: unknown) {
+//     console.error('Error generating motivation quote:', error.message);
+//     return 'Push yourself because no one else will!';
+//   }
+// }
+
+
 export async function generateMotivationQuote() {
   // Check API key
   if (!API_KEY) {
@@ -151,11 +177,12 @@ export async function generateMotivationQuote() {
     
     // Remove quotes if present
     return quote.replace(/^["'`]|["'`]$/g, '');
-  } catch (error: unknown) {
-    console.error('Error generating motivation quote:', error.message);
+  } catch (error: any) { // Change 'unknown' to 'any' or handle the type check
+    console.error('Error generating motivation quote:', error?.message || error);
     return 'Push yourself because no one else will!';
   }
 }
+
 
 // Fallback plan in case AI fails
 function getFallbackPlan(userData: UserData) {
