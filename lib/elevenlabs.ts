@@ -44,7 +44,7 @@ export async function generateSpeech(text: string, apiKey: string): Promise<Arra
 
     console.log('Speech generated successfully via ElevenLabs');
     return await response.arrayBuffer();
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('ElevenLabs error:', error.message);
     console.log('Falling back to browser-based TTS (Web Speech API)...');
     throw error;
