@@ -112,7 +112,7 @@ Return only the JSON object without any markdown code blocks or additional text.
     try {
       parsedData = JSON.parse(cleanedJSON);
       console.log('JSON parsed successfully');
-    } catch (parseErr: unknown) {
+    } catch (parseErr) {
       console.error('JSON parsing failed:', parseErr.message);
       console.error('Raw response was:', text.substring(0, 200));
       throw new Error('Could not parse Gemini response as JSON');
@@ -125,7 +125,7 @@ Return only the JSON object without any markdown code blocks or additional text.
 
     console.log('Fitness plan generated successfully');
     return parsedData;
-  } catch (error: unknown) {
+  } catch (error) {
     console.error('Error in generateFitnessPlan:', error.message);
     console.log('Returning fallback plan');
     return getFallbackPlan(userData);
@@ -177,7 +177,7 @@ export async function generateMotivationQuote() {
     
     // Remove quotes if present
     return quote.replace(/^["'`]|["'`]$/g, '');
-  } catch (error: unknown) { // Change 'unknown' to 'any' or handle the type check
+  } catch (error) { // Change 'unknown' to 'any' or handle the type check
     console.error('Error generating motivation quote:', error?.message || error);
     return 'Push yourself because no one else will!';
   }
