@@ -90,7 +90,7 @@ export default function ImageModal({ itemName, isOpen, onClose }: ImageModalProp
       } else {
         throw new Error(data.error || 'Failed to generate image');
       }
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('Error generating image:', err);
       setError(err.message || 'Failed to generate image. Please try again.');
     } finally {
