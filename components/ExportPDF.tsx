@@ -137,7 +137,7 @@ export default function ExportPDF() {
       alert('PDF downloaded successfully!\n\nCheck your Downloads folder.\n\n' + 
             `Total pages: ${pageNumber}`);
       
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error( 'PDF Export Error:', {
         message: error?.message,
         name: error?.name,
