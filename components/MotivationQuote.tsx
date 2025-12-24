@@ -16,7 +16,7 @@ export default function MotivationQuote() {
     try {
       const newQuote = await generateMotivationQuote();
       setQuote(newQuote);
-    } catch (error) {
+    } catch (error:unknown) {
       setQuote('Your only limit is you!');
     }
   };
