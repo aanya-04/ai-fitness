@@ -43,7 +43,6 @@
 
 
 
-
 'use client';
 import { Moon, Sun } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -55,11 +54,13 @@ export default function ThemeToggle() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    // Initialize theme
     initializeDarkMode();
+    // Set mounted to true to signal hydration is complete
     setMounted(true);
   }, [initializeDarkMode]);
 
-  // Show a skeleton loader instead of disabled button
+  // Prevent hydration mismatch by returning a placeholder until mounted
   if (!mounted) {
     return (
       <div className="w-10 h-10 rounded-md bg-slate-200 dark:bg-slate-800 animate-pulse" />
@@ -76,7 +77,7 @@ export default function ThemeToggle() {
       className="transition-all duration-200 hover:scale-110"
     >
       {darkMode ? (
-        <Sun className="h-5 w-5 text-yellow-500 transition-transform duration-200 rotate-0 hover:rotate-45" />
+        <Sun className="h-5 w-5 text-yellow-500 transition-transform duration-200" />
       ) : (
         <Moon className="h-5 w-5 text-slate-700 transition-transform duration-200" />
       )}
