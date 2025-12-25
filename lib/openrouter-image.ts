@@ -80,7 +80,8 @@ export async function generateImageWithOpenRouter(
     };
 
   } catch (error: unknown) {
-    console.error(`Error generating ${params.type} image:`, error.message);
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+    console.error(`Error generating ${params.type} image:`, errorMessage);
     
     // Return placeholder on error
     return {
