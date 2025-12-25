@@ -42,9 +42,7 @@
 // }
 
 
-
 'use client';
-
 import { Moon, Sun } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useFitnessStore } from '@/lib/store';
@@ -54,22 +52,19 @@ export default function ThemeToggle() {
   const { darkMode, toggleDarkMode, initializeDarkMode } = useFitnessStore();
   const [mounted, setMounted] = useState(false);
 
-  // --- CHANGED START ---
-  // Combine the two previous useEffects into a SINGLE effect.
-  // This prevents "Waterfall" or "Cascading" renders where one 
-  // state update triggers a second state update in a different effect.
+  // Initialize dark mode only once when component mounts
+  useEffect(() => {
+    initializeDarkMode();
+  }, [initializeDarkMode]);
+
+  // Separate effect to set mounted state
   useEffect(() => {
     setMounted(true);
-    initializeDarkMode(); 
-  }, [initializeDarkMode]); 
-  // --- CHANGED END ---
+  }, []);
 
   // Show a placeholder until the component has mounted on the client
   if (!mounted) {
-    // --- CHANGED START ---
-    // Removed the "animate-pulse" class to keep the DOM stable during hydration
     return <div className="w-10 h-10 rounded-md" />;
-    // --- CHANGED END ---
   }
 
   return (
