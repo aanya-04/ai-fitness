@@ -41,7 +41,6 @@
 //   );
 // }
 
-
 'use client';
 import { Moon, Sun } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -52,15 +51,16 @@ export default function ThemeToggle() {
   const { darkMode, toggleDarkMode, initializeDarkMode } = useFitnessStore();
   const [mounted, setMounted] = useState(false);
 
-  // Initialize dark mode only once when component mounts
+  // Initialize dark mode and set mounted state
   useEffect(() => {
-    initializeDarkMode();
-  }, [initializeDarkMode]);
-
-  // Separate effect to set mounted state
-  useEffect(() => {
+    // Set mounted immediately
     setMounted(true);
-  }, []);
+    
+    // Initialize dark mode after mount
+    requestAnimationFrame(() => {
+      initializeDarkMode();
+    });
+  }, []); // Empty dependency array - only runs once
 
   // Show a placeholder until the component has mounted on the client
   if (!mounted) {
